@@ -1,0 +1,40 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #f2f2f2 !important;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  -webkit-text-size-adjust: 100%;
+  outline: none;
+  font-family: Roboto, "Helvetica Neue", Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+.content {
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+  &--full{
+    max-width: 1000px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  padding: 0 30px;
+  padding-top: 80px;
+}
+
+.main-layout-white {
+  background-color: #fff;
+  height: 100vh;
+}
