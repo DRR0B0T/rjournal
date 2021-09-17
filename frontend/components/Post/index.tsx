@@ -18,7 +18,7 @@ export const Post: React.FC = () => {
         Пока одни не смогли соотнести размеры животного и окружения
       </Typography>
       <Image
-        src="https://leonardo.osnova.io/33b1516d-caa0-54dd-b35b-404ead6aba53/-/preview/600/-/format/webp/"
+        src="https://leonardo.osnova.io/5d87f4a6-15e2-5d9b-96bc-c5525a24311c/"
         height={500}
         width={600}
       />

@@ -3,15 +3,26 @@ import {
   SearchOutlined as SearchIcon,
   SmsOutlined as MessageIcon,
   Menu as MenuIcon,
-  ExpandMoreOutlined as ArrowButton,
+  AccountCircleOutlined as UserIcon,
   NotificationsNoneOutlined as NotificationIcon,
 } from "@material-ui/icons";
 
 import styles from "./Header.module.scss";
 import { Avatar, Button, IconButton, Paper } from "@material-ui/core";
 import Link from "next/link";
+import { AuthDialog } from "../AuthDialog";
 
 export const Header: React.FC = () => {
+  const [visible, setVisible] = React.useState(false);
+
+  const openAuthDialog = () => {
+    setVisible(true);
+  };
+
+  const closeAuthDialog = () => {
+    setVisible(false);
+  };
+
   return (
     <Paper classes={{ root: styles.root }} elevation={0}>
       <div className="d-flex align-center">
@@ -50,17 +61,22 @@ export const Header: React.FC = () => {
         <IconButton>
           <NotificationIcon />
         </IconButton>
-        <Link href="/profile/1">
-          <a className="d-flex align-center">
-            <Avatar
-              className={styles.avatar}
-              alt="Remi Sharp"
-              src="https://leonardo.osnova.io/33b1516d-caa0-54dd-b35b-404ead6aba53/-/preview/600/-/format/webp/"
-            />
-            <ArrowButton />
-          </a>
-        </Link>
+        {/*<Link href="/profile/1">*/}
+        {/*  <a className="d-flex align-center">*/}
+        {/*    <Avatar*/}
+        {/*      className={styles.avatar}*/}
+        {/*      alt="Remi Sharp"*/}
+        {/*      src="https://leonardo.osnova.io/33b1516d-caa0-54dd-b35b-404ead6aba53/-/preview/600/-/format/webp/"*/}
+        {/*    />*/}
+        {/*    <ArrowButton />*/}
+        {/*  </a>*/}
+        {/*</Link>*/}
+        <div onClick={openAuthDialog} className={styles.loginButton}>
+          <UserIcon />
+          Войти
+        </div>
       </div>
+      <AuthDialog onClose={closeAuthDialog} visible={visible} />
     </Paper>
   );
 };

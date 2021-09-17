@@ -41,7 +41,7 @@ export default function Settings() {
           />
           <Divider className="mt-30 mb-20" />
           <Button color="primary" variant="contained">
-            Сохранить изминения
+            Сохранить изменения
           </Button>
         </form>
       </Paper>

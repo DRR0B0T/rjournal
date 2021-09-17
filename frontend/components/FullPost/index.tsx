@@ -9,7 +9,7 @@ import { PostActions } from "../PostActions";
 export const FullPost: React.FC = () => {
   return (
     <Paper elevation={0} className={styles.paper}>
-      <div style={{ margin: "0 auto", width: 680 }}>
+      <div className="container">
         <Typography variant="h4" className={styles.title}>
           В Красноярске детям провели «открытый урок» на пустыре, где власти
           обещали построить школу
