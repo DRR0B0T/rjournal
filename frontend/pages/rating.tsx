@@ -53,7 +53,7 @@ export default function Rating() {
           <TableBody>
             <TableRow>
               <TableCell component="th" scope="row">
-                <span className="mr-15">1</span>Максим Даун
+                <span className="mr-15">1</span>Максим Петрович
               </TableCell>
               <TableCell align="right">750</TableCell>
               <TableCell align="right">
