@@ -4,5 +4,5 @@ export class SearchPostDto {
   views?: 'DESC' | 'ASC';
   limit?: number;
   take?: number;
-  tags?: string;
+  tag?: string;
 }

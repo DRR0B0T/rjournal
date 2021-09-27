@@ -37,7 +37,7 @@ export class PostService {
     };
   }
 
-  search(dto: SearchPostDto) {
+  async search(dto: SearchPostDto) {
     const qb = this.repository.createQueryBuilder('p');
 
     qb.limit(dto.limit || 0);
@@ -48,20 +48,41 @@ export class PostService {
     }
 
     if (dto.body) {
-      qb.where(`p.body ILIKE %${dto.body}%`);
+      qb.andWhere(`p.body ILIKE :body`);
     }
 
-    if (dto.body) {
-      qb.where(`p.body ILIKE %${dto.body}%`);
+    if (dto.title) {
+      qb.andWhere(`p.title ILIKE :title`);
     }
+
+    if (dto.tag) {
+      qb.andWhere(`p.tags ILIKE :tag`);
+    }
+
+    qb.setParameters({
+      title: `%${dto.title}%`,
+      body: `%${dto.body}%`,
+      tag: `%${dto.tag}%`,
+      views: dto.views || '',
+    });
+
+    const [items, total] = await qb.getManyAndCount();
+
+    return { items, total };
   }
 
+  //Счётчик просмотров статьи
   async findOne(id: number) {
-    const find = await this.repository.findOne(+id);
-    if (!find) {
-      throw new NotFoundException('Статья не найдена');
-    }
-    return find;
+    await this.repository ///Запрос на обновление статьи
+      .createQueryBuilder('posts') //Столбец в БД
+      .whereInIds(id)
+      .update()
+      .set({
+        //Игкремент просмотров
+        views: () => 'views + 1',
+      })
+      .execute();
+    return this.repository.findOne(id); //Запрос на получение статьи
   }
 
   async update(id: number, dto: UpdatePostDto) {
