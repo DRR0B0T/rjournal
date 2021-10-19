@@ -7,11 +7,11 @@ export type CreateUserDto = {
   fullName: string;
 } & LoginDto;
 
-export type ResponseCreateUserDto = {
+export type ResponseUser = {
   createdAt: string;
   email: string;
   fullName: string;
   id: number;
-  token: string;
+  access_token: string;
   updatedAt: string;
 };

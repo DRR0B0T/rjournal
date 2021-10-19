@@ -39,14 +39,14 @@ export class AuthService {
 
   async register(dto: CreateUserDto) {
     try {
-      const { password, ...user } = await this.userService.create({
+      const { password, ...userData } = await this.userService.create({
         email: dto.email,
         fullName: dto.fullName,
         password: dto.password,
       });
       return {
-        ...user,
-        access_token: this.generateJwtToken(user),
+        ...userData,
+        access_token: this.generateJwtToken(userData),
       };
     } catch (e) {
       throw new ForbiddenException('Ошибка при регистрации');

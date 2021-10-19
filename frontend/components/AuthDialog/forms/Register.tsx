@@ -17,6 +17,8 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   onOpenRegister,
   onOpenLogin,
 }) => {
+  const [errorMessage, setErrorMessage] = React.useState("");
+
   const form = useForm({
     mode: "onChange",
     resolver: yupResolver(RegisterFormSchema),
@@ -25,14 +27,14 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   const onSubmit = async (dto: CreateUserDto) => {
     try {
       const data = await UserApi.register(dto);
-      console.log(data);
-      setCookie(null, "authToken", data.token, {
+      setCookie(null, "authToken", data.access_token, {
         maxAge: 30 * 24 * 60 * 60,
         path: "/",
       });
+      setErrorMessage("");
     } catch (e) {
-      alert("Error registration");
       console.warn("Ошибка при регистрации", e);
+      if (e.response) setErrorMessage(e.response.data.message);
     }
   };
 
@@ -42,6 +44,13 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         <FormField name="fullName" label="Имя и фамилия" />
         <FormField name="email" label="Почта" />
         <FormField name="password" label="Пароль" />
+
+        {errorMessage && (
+          <Alert className="mb-20" severity="error">
+            {errorMessage}
+          </Alert>
+        )}
+
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="d-flex align-center justify-between">
             <Button
