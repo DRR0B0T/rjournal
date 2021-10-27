@@ -5,6 +5,8 @@ node_modules
 .idea/
 /.pnp
 .pnp.js
+yarn.lock
+.gitignore
 
 # testing
 /coverage

@@ -8,12 +8,15 @@ import { LoginDto } from "../../../utils/API/types";
 import { UserApi } from "../../../utils/API";
 import { setCookie } from "nookies";
 import Alert from "@material-ui/lab/Alert";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setUserData } from "../../../redux/slices/user";
 
 interface LoginFormProps {
   onOpenRegister: () => void;
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onOpenRegister }) => {
+  const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = React.useState("");
 
   const form = useForm({
@@ -29,9 +32,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onOpenRegister }) => {
         path: "/",
       });
       setErrorMessage("");
-    } catch (e) {
-      console.warn("Ошибка при регистрации", e);
-      if (e.response) setErrorMessage(e.response.data.message);
+    } catch (err) {
+      console.warn("Ошибка при регистрации", err);
     }
   };
 

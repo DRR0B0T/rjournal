@@ -1,4 +1,5 @@
 import React from "react";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import {
   SearchOutlined as SearchIcon,
   SmsOutlined as MessageIcon,
@@ -11,8 +12,11 @@ import styles from "./Header.module.scss";
 import { Avatar, Button, IconButton, Paper } from "@material-ui/core";
 import Link from "next/link";
 import { AuthDialog } from "../AuthDialog";
+import { useAppSelector } from "../../redux/hooks";
+import { selectUserData } from "../../redux/slices/user";
 
 export const Header: React.FC = () => {
+  const userData = useAppSelector(selectUserData);
   const [visible, setVisible] = React.useState(false);
 
   const openAuthDialog = () => {
@@ -61,20 +65,23 @@ export const Header: React.FC = () => {
         <IconButton>
           <NotificationIcon />
         </IconButton>
-        {/*<Link href="/profile/1">*/}
-        {/*  <a className="d-flex align-center">*/}
-        {/*    <Avatar*/}
-        {/*      className={styles.avatar}*/}
-        {/*      alt="Remi Sharp"*/}
-        {/*      src="https://leonardo.osnova.io/33b1516d-caa0-54dd-b35b-404ead6aba53/-/preview/600/-/format/webp/"*/}
-        {/*    />*/}
-        {/*    <ArrowButton />*/}
-        {/*  </a>*/}
-        {/*</Link>*/}
-        <div onClick={openAuthDialog} className={styles.loginButton}>
-          <UserIcon />
-          Войти
-        </div>
+        {userData ? (
+          <Link href="/profile/1">
+            <a className="d-flex align-center">
+              <Avatar
+                className={styles.avatar}
+                alt="Remi Sharp"
+                src="https://leonardo.osnova.io/33b1516d-caa0-54dd-b35b-404ead6aba53/-/preview/600/-/format/webp/"
+              />
+              <ArrowBackIcon />
+            </a>
+          </Link>
+        ) : (
+          <div onClick={openAuthDialog} className={styles.loginButton}>
+            <UserIcon />
+            Войти
+          </div>
+        )}
       </div>
       <AuthDialog onClose={closeAuthDialog} visible={visible} />
     </Paper>

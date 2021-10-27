@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FormField } from "../../FormField";
 import { UserApi } from "../../../utils/API";
 import { CreateUserDto } from "../../../utils/API/types";
+import { Alert } from "@material-ui/lab";
 
 interface RegisterFormProps {
   onOpenRegister: () => void;
@@ -32,9 +33,8 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         path: "/",
       });
       setErrorMessage("");
-    } catch (e) {
-      console.warn("Ошибка при регистрации", e);
-      if (e.response) setErrorMessage(e.response.data.message);
+    } catch (err) {
+      console.warn("Ошибка при регистрации", err);
     }
   };
 

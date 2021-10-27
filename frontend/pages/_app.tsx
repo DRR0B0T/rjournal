@@ -6,6 +6,8 @@ import { theme } from "../theme";
 import { CssBaseline, MuiThemeProvider } from "@material-ui/core";
 import "macro-css";
 import { Header } from "../components/Header";
+import { Provider } from "react-redux";
+import { store } from "../redux/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -26,8 +28,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <Header />
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <Header />
+          <Component {...pageProps} />
+        </Provider>
       </MuiThemeProvider>
     </>
   );

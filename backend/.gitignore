@@ -1,6 +1,10 @@
 # compiled output
 /dist
 /node_modules
+.gitignore
+yarn.lock
+.prettierrc
+
 
 # Logs
 logs
